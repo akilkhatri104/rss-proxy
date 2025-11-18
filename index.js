@@ -1,7 +1,10 @@
+import "dotenv/config";
 import axios from "axios";
 import express from "express";
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 
 app.get("/", (req, res) => {
     return res.send("Hello World");
@@ -19,6 +22,8 @@ app.get("/fetch-rss", async (req, res) => {
     return res.send(xmlData);
 });
 
-app.listen(3000, () => {
-    console.log("Server Running...");
+const port = Number(process.env.PORT) || 8000;
+
+app.listen(port, () => {
+    console.log("Server Running at PORT : ", port);
 });
